@@ -71,6 +71,9 @@
     <!-- Navigation Bar -->
     <div class="navbar">
         <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="classes.html">Classes Offered</a>
+        <a href="resources.html">Resources</a>
         <a href="what-to-bring.html">What to Bring</a>
         <a href="faqs.html">FAQ</a>
         <a href="contact.html">Contact Us</a>
@@ -127,32 +130,6 @@
     <footer>
         <p>&copy; 2025 Kauffman Defense. All rights reserved.</p>
     </footer>
-
-    <script>
-        document.getElementById("bookingForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-
-            let formData = new FormData(this);
-
-            fetch("https://script.google.com/macros/s/https://script.google.com/macros/s/AKfycby3M9vHDcSoPpTzLOLlM55291cApFsjHWhgFlKaF2K0ywXHjhfAsIwhYhZ9yAQZPSy0/exec/exec", {
-                method: "POST",
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.result === "success") {
-                    alert("Your reservation has been submitted! You will receive an email confirmation.");
-                    document.getElementById("bookingForm").reset();
-                } else {
-                    alert("Error submitting reservation. Please try again.");
-                }
-            })
-            .catch(error => {
-                console.error("Error:", error);
-                alert("Error submitting reservation.");
-            });
-        });
-    </script>
 
 </body>
 </html>
