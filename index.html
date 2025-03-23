@@ -65,7 +65,7 @@
             background-color: #222;
             border-radius: 5px;
         }
-        input, button {
+        input, select, button {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
@@ -139,6 +139,29 @@
 
             <label for="address">Home Address:</label>
             <input type="text" id="address" name="address" required>
+
+            <label for="classType">Class Type:</label>
+            <select id="classType" name="classType">
+                <option value="public" selected>Public Class</option>
+                <option value="private">Private Class</option>
+            </select>
+
+            <label for="preferredDate">Preferred Date:</label>
+            <input type="date" id="preferredDate" name="preferredDate" required>
+
+            <label for="contactMethod">Preferred Contact Method:</label>
+            <select id="contactMethod" name="contactMethod">
+                <option value="email" selected>Email</option>
+                <option value="phone">Phone</option>
+            </select>
+
+            <label for="rentalPistol">Do you need a rental pistol? ($20 fee):</label>
+            <select id="rentalPistol" name="rentalPistol">
+                <option value="yes">Yes</option>
+                <option value="no" selected>No</option>
+            </select>
+
+            <p><strong>Disclaimer:</strong> A rental pistol costs an additional $20. You will be charged for the rental at the time of the class.</p>
 
             <button type="submit">Submit Reservation</button>
         </form>
