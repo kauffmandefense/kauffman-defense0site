@@ -14,49 +14,101 @@
         h1, h2 {
             color: white;
         }
-        section {
-            margin: 20px auto;
-            padding: 20px;
-            width: 80%;
-            max-width: 800px;
+        form {
             background-color: #222;
+            padding: 20px;
             border-radius: 10px;
+            width: 50%;
+            margin: auto;
         }
-        label {
+        label, input, select {
             display: block;
-            margin-top: 10px;
-        }
-        input, select {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-            background-color: #333;
-            color: white;
-            border: 1px solid white;
-            border-radius: 5px;
+            margin: 10px auto;
+            width: 80%;
         }
         button {
-            margin-top: 15px;
-            padding: 10px 20px;
             background-color: white;
             color: black;
+            padding: 10px;
             border: none;
             cursor: pointer;
-            border-radius: 5px;
         }
-        button:hover {
-            background-color: grey;
-        }
-        iframe {
-            width: 100%;
-            border: solid 1px #777;
+        .hidden {
+            display: none;
         }
     </style>
+    <script>
+        function toggleClassOptions() {
+            var classType = document.getElementById("classType").value;
+            document.getElementById("publicClassDate").classList.toggle("hidden", classType !== "Public");
+            document.getElementById("privateContactMethod").classList.toggle("hidden", classType !== "Private");
+        }
+
+        function submitForm(event) {
+            event.preventDefault();
+            
+            var formData = new FormData(document.getElementById("bookingForm"));
+            fetch("https://script.google.com/macros/s/AKfycbwfO7q0JyfCmyV7iB8hI-oKmNg2qh4FcBKXW8wE99riPKIiePvNVJclf2YqHsXkkegR/exec", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => alert("Form submitted successfully!"))
+            .catch(error => alert("Error submitting form."));
+        }
+    </script>
 </head>
 <body>
 
-    <h1>Welcome to Kauffman Defense</h1>
-    
-    <section id="upcoming-classes">
-        <h2>Upcoming CPL Training Classes</h2>
-        <iframe src="https://calendar.google.com/calendar/embed?src=b9f3dc7c29fde779d1256d194c7cebd80950cc3f0c3bd5e0e5fddbbf5dcb955f
+    <h1>Welcome to Kauffman Defense CPL Training</h1>
+
+    <h2>Upcoming CPL Training Classes</h2>
+    <iframe src="https://calendar.google.com/calendar/embed?src=b9f3dc7c29fde779d1256d194c7cebd80950cc3f0c3bd5e0e5fddbbf5dcb955f%40group.calendar.google.com&ctz=UTC" 
+            style="border: 0" width="100%" height="600" frameborder="0" scrolling="no"></iframe>
+
+    <h2>Book Your CPL Training</h2>
+    <form id="bookingForm" onsubmit="submitForm(event)">
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" required>
+
+        <label for="address">Home Address:</label>
+        <input type="text" id="address" name="address" required>
+
+        <label for="classType">Class Type:</label>
+        <select id="classType" name="classType" onchange="toggleClassOptions()" required>
+            <option value="Public">Public</option>
+            <option value="Private">Private</option>
+        </select>
+
+        <div id="publicClassDate">
+            <label for="classDate">Course Date (MM/DD/YYYY):</label>
+            <input type="text" id="classDate" name="classDate">
+        </div>
+
+        <div id="privateContactMethod" class="hidden">
+            <label for="contactMethod">Preferred Contact Method:</label>
+            <select id="contactMethod" name="contactMethod">
+                <option value="Phone Call">Phone Call</option>
+                <option value="Text">Text</option>
+                <option value="Email">Email</option>
+            </select>
+        </div>
+
+        <label for="rentalPistol">Will you require a rental pistol? ($20 Fee)</label>
+        <select id="rentalPistol" name="rentalPistol" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <button type="submit">Continue</button>
+    </form>
+
+</body>
+</html>
+
