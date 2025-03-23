@@ -79,46 +79,4 @@
     <script>
         function toggleClassOptions() {
             var classType = document.getElementById("classType").value;
-            document.getElementById("publicClassOptions").style.display = (classType === "Public") ? "block" : "none";
-            document.getElementById("privateClassOptions").style.display = (classType === "Private") ? "block" : "none";
-        }
-
-        function submitForm() {
-            const scriptURL = "https://script.google.com/macros/s/AKfycbwfO7q0JyfCmyV7iB8hI-oKmNg2qh4FcBKXW8wE99riPKIiePvNVJclf2YqHsXkkegR/exec";
-            
-            let classType = document.getElementById("classType").value;
-            let classDate = (classType === "Public") ? document.getElementById("classDate").value : "";
-            let contactMethod = (classType === "Private") ? document.getElementById("contactMethod").value : "";
-
-            let formData = {
-                name: document.getElementById("name").value,
-                email: document.getElementById("email").value,
-                phone: document.getElementById("phone").value,
-                address: document.getElementById("address").value,
-                classType: classType,
-                classDate: classDate,
-                contactMethod: contactMethod,
-                rentalPistol: document.getElementById("rentalPistol").value
-            };
-
-            fetch(scriptURL, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(formData)
-            })
-            .then(response => response.text())
-            .then(data => {
-                if (data === "Success") {
-                    alert("Form submitted successfully!");
-                } else {
-                    alert("Error submitting form: " + data);
-                }
-            })
-            .catch(error => {
-                alert("Error: " + error.message);
-            });
-        }
-    </script>
-
-</body>
-</html>
+            document.getElementById
