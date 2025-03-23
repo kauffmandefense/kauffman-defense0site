@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classes Offered - Kauffman Defense</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .navbar {
+            background-color: #222;
+            padding: 10px;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            padding: 14px 20px;
+            display: inline-block;
+        }
+        .navbar a:hover {
+            background-color: #555;
+        }
+        .container {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <a href="classes.html">Classes Offered</a>
+    </div>
+
+    <div class="container">
+        <h1>Our CPL Training Course</h1>
+        <p>We offer a single CPL training course that meets Michigan’s requirements.</p>
+        <p>Class cost: $100</p>
+    </div>
+
+</body>
+</html>
