@@ -4,130 +4,107 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kauffman Defense - CPL Training</title>
-    <style>
-        body {
-            background-color: black;
-            color: white;
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-        .container {
-            width: 50%;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid white;
-        }
-        label, input, select {
-            display: block;
-            width: 100%;
-            margin: 10px 0;
-            padding: 5px;
-        }
-        button {
-            margin-top: 10px;
-            padding: 10px;
-            background-color: white;
-            color: black;
-            border: none;
-            cursor: pointer;
-        }
-    </style>
 </head>
 <body>
-
     <h1>Welcome to Kauffman Defense</h1>
     <h2>Upcoming CPL Training Classes</h2>
-    
+
+    <!-- Embedded Google Calendar -->
     <iframe src="https://calendar.google.com/calendar/embed?src=b9f3dc7c29fde779d1256d194c7cebd80950cc3f0c3bd5e0e5fddbbf5dcb955f%40group.calendar.google.com&ctz=UTC" 
-        style="border: 0" width="100%" height="600" frameborder="0" scrolling="no">
+        style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no">
     </iframe>
 
     <h2>Book Your CPL Training</h2>
-    
-    <div class="container">
-        <form id="cplForm">
-            <label for="name">Full Name:</label>
-            <input type="text" id="name" name="name" required>
+    <form id="cplForm">
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" required><br>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br>
 
-            <label for="phone">Phone Number:</label>
-            <input type="tel" id="phone" name="phone" required>
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" required><br>
 
-            <label for="address">Home Address:</label>
-            <input type="text" id="address" name="address" required>
+        <label for="address">Home Address:</label>
+        <input type="text" id="address" name="address" required><br>
 
-            <!-- Class Type Selection -->
-            <label for="classType">Class Type:</label>
-            <select id="classType" name="classType" required onchange="toggleClassDetails()">
-                <option value="Public">Public</option>
-                <option value="Private">Private</option>
-            </select>
+        <!-- Class Type Selection -->
+        <label for="classType">Class Type:</label>
+        <select id="classType" name="classType" required>
+            <option value="Public">Public</option>
+            <option value="Private">Private</option>
+        </select><br>
 
-            <!-- Public Class Date Selection -->
-            <div id="publicClassSection">
-                <label for="preferredDate">Preferred Class Date (MM/DD/YYYY):</label>
-                <input type="text" id="preferredDate" name="preferredDate">
-            </div>
+        <!-- Preferred Date (Only if Public Class is Selected) -->
+        <div id="dateSection">
+            <label for="preferredDate">Preferred Class Date (MM/DD/YYYY):</label>
+            <input type="text" id="preferredDate" name="preferredDate"><br>
+        </div>
 
-            <!-- Private Class Contact Preference -->
-            <div id="privateClassSection" style="display: none;">
-                <label for="contactMethod">Preferred Contact Method for Private Class:</label>
-                <select id="contactMethod" name="contactMethod">
-                    <option value="Phone Call">Phone Call</option>
-                    <option value="Text Message">Text Message</option>
-                    <option value="Email">Email</option>
-                </select>
-            </div>
+        <!-- Contact Method (Only if Private Class is Selected) -->
+        <div id="contactMethodSection" style="display: none;">
+            <label for="contactMethod">Preferred Contact Method:</label>
+            <select id="contactMethod" name="contactMethod">
+                <option value="Phone Call">Phone Call</option>
+                <option value="Text">Text</option>
+                <option value="Email">Email</option>
+            </select><br>
+        </div>
 
-            <!-- Rental Pistol Selection -->
-            <label for="rentalPistol">Do you need a rental pistol? ($20 additional fee):</label>
-            <select id="rentalPistol" name="rentalPistol">
-                <option value="No">No</option>
-                <option value="Yes">Yes</option>
-            </select>
+        <!-- Rental Pistol Selection -->
+        <label for="rentalPistol">Will you require a rental pistol? ($20 additional fee)</label>
+        <select id="rentalPistol" name="rentalPistol" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select><br>
 
-            <button type="button" onclick="submitForm()">Continue</button>
-        </form>
-    </div>
+        <button type="submit">Continue</button>
+    </form>
 
     <script>
-        function toggleClassDetails() {
-            var classType = document.getElementById("classType").value;
-            document.getElementById("publicClassSection").style.display = (classType === "Public") ? "block" : "none";
-            document.getElementById("privateClassSection").style.display = (classType === "Private") ? "block" : "none";
-        }
+        document.getElementById("classType").addEventListener("change", function() {
+            var classType = this.value;
+            var dateSection = document.getElementById("dateSection");
+            var contactMethodSection = document.getElementById("contactMethodSection");
+            var preferredDateInput = document.getElementById("preferredDate");
+            var contactMethodInput = document.getElementById("contactMethod");
 
-        function submitForm() {
-            var form = document.getElementById("cplForm");
-            var formData = new FormData(form);
+            if (classType === "Public") {
+                dateSection.style.display = "block";
+                contactMethodSection.style.display = "none";
+                preferredDateInput.required = true;
+                contactMethodInput.required = false;
+            } else {
+                dateSection.style.display = "none";
+                contactMethodSection.style.display = "block";
+                preferredDateInput.required = false;
+                contactMethodInput.required = true;
+            }
+        });
 
-            // Convert FormData to an object
-            var data = {};
-            formData.forEach((value, key) => {
-                data[key] = value;
-            });
+        document.getElementById("cplForm").addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent default form submission behavior
 
-            // Ensure empty fields are properly handled
-            data.preferredDate = data.preferredDate || "N/A";
-            data.contactMethod = data.contactMethod || "N/A";
+            let formData = new FormData(this);
 
-            fetch("https://script.google.com/macros/s/AKfycbx8jICC2M50Yu23yh1dTMoprz9BLWfJ9uAxG-hMmN3nonTi5Dg9N9ATEgoA_Qdku4Rb/exec", {
+            fetch("https://script.google.com/macros/s/AKfycby3M9vHDcSoPpTzLOLlM55291cApFsjHWhgFlKaF2K0ywXHjhfAsIwhYhZ9yAQZPSy0/exec", {
                 method: "POST",
-                mode: "no-cors",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data)
-            }).then(response => {
-                alert("Form submitted successfully!");
-                form.reset();
-            }).catch(error => {
-                alert("Error submitting form. Please try again.");
-                console.error("Submission error:", error);
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === "success") {
+                    alert("Form submitted successfully!");
+                    document.getElementById("cplForm").reset();
+                } else {
+                    alert("Error submitting form.");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("Error submitting form.");
             });
-        }
+        });
     </script>
 
 </body>
