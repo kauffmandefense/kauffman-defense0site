@@ -40,8 +40,8 @@
     <script>
         function toggleClassOptions() {
             var classType = document.getElementById("classType").value;
-            document.getElementById("publicClassDate").classList.toggle("hidden", classType !== "Public");
-            document.getElementById("privateContactMethod").classList.toggle("hidden", classType !== "Private");
+            document.getElementById("publicClassDate").style.display = (classType === "Public") ? "block" : "none";
+            document.getElementById("privateContactMethod").style.display = (classType === "Private") ? "block" : "none";
         }
 
         function submitForm(event) {
@@ -86,12 +86,12 @@
             <option value="Private">Private</option>
         </select>
 
-        <div id="publicClassDate">
+        <div id="publicClassDate" style="display: none;">
             <label for="classDate">Course Date (MM/DD/YYYY):</label>
             <input type="text" id="classDate" name="classDate">
         </div>
 
-        <div id="privateContactMethod" class="hidden">
+        <div id="privateContactMethod" style="display: none;">
             <label for="contactMethod">Preferred Contact Method:</label>
             <select id="contactMethod" name="contactMethod">
                 <option value="Phone Call">Phone Call</option>
@@ -111,4 +111,3 @@
 
 </body>
 </html>
-
