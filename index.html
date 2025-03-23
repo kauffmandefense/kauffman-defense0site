@@ -3,31 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CPL Training in Gaylord, MI - Kauffman Defense - Concealed Pistol License Course</title>
+    <title>CPL Training in Gaylord, MI - Kauffman Defense</title>
     <meta name="description" content="Looking for CPL training in Gaylord, MI? Kauffman Defense offers expert Concealed Pistol License (CPL) courses to help you get certified and apply for your Michigan CPL.">
     <meta name="keywords" content="CPL training, Gaylord MI, Concealed Pistol License, Kauffman Defense, Michigan CPL, firearm safety training, concealed carry class">
-    
-    <!-- Structured Data for Local Business -->
-    <script type="application/ld+json">
-    {
-      "@context": "http://schema.org",
-      "@type": "LocalBusiness",
-      "name": "Kauffman Defense",
-      "image": "YOUR_LOGO_URL",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "YOUR_STREET_ADDRESS",
-        "addressLocality": "Gaylord",
-        "addressRegion": "MI",
-        "postalCode": "49735",
-        "addressCountry": "US"
-      },
-      "telephone": "YOUR_PHONE_NUMBER",
-      "url": "YOUR_WEBSITE_URL",
-      "sameAs": "https://www.facebook.com/kauffmandefense"
-    }
-    </script>
-    
+
     <style>
         body {
             background-color: black;
@@ -53,10 +32,6 @@
         }
         .container {
             padding: 20px;
-        }
-        .calendar-container {
-            margin: 20px auto;
-            max-width: 800px;
         }
         .booking-section {
             margin: 30px auto;
@@ -111,19 +86,6 @@
         <p>Learn from experienced instructors who will guide you through firearm safety, Michigan laws, and everything you need to know to apply for your CPL.</p>
     </div>
 
-    <!-- Embedded Google Calendar -->
-    <div class="calendar-container">
-        <h2>Upcoming CPL Classes</h2>
-        <iframe 
-            src="https://calendar.google.com/calendar/embed?src=b9f3dc7c29fde779d1256d194c7cebd80950cc3f0c3bd5e0e5fddbbf5dcb955f%40group.calendar.google.com&ctz=America%2FNew_York" 
-            style="border: 0" 
-            width="800" 
-            height="600" 
-            frameborder="0" 
-            scrolling="no">
-        </iframe>
-    </div>
-
     <!-- Booking Form -->
     <div class="booking-section">
         <h2>Reserve Your Spot for CPL Training</h2>
@@ -141,7 +103,7 @@
             <input type="text" id="address" name="address" required>
 
             <label for="classType">Class Type:</label>
-            <select id="classType" name="classType" required>
+            <select id="classType" name="classType">
                 <option value="Public">Public (default)</option>
                 <option value="Private">Private</option>
             </select>
@@ -150,25 +112,20 @@
             <input type="date" id="preferredDate" name="preferredDate" required>
 
             <label for="contactMethod">Preferred Contact Method:</label>
-            <select id="contactMethod" name="contactMethod" required>
+            <select id="contactMethod" name="contactMethod">
                 <option value="Email">Email</option>
                 <option value="Phone">Phone</option>
             </select>
 
-            <label for="rentalPistol">Do you need a rental pistol? (Additional $20):</label>
-            <select id="rentalPistol" name="rentalPistol" required>
+            <label for="rentalPistol">Do you need a rental pistol? ($20 fee):</label>
+            <select id="rentalPistol" name="rentalPistol">
                 <option value="No">No</option>
                 <option value="Yes">Yes</option>
             </select>
 
             <button type="submit">Submit Reservation</button>
         </form>
-    </div>
-
-    <!-- Facebook Link -->
-    <div class="facebook-link">
-        <p>Follow us on Facebook for updates:</p>
-        <a href="https://www.facebook.com/kauffmandefense" target="_blank" style="color: #1E90FF;">Kauffman Defense Facebook</a>
+        <div id="responseMessage" style="color: green; margin-top: 20px;"></div>
     </div>
 
     <!-- Footer -->
@@ -177,32 +134,27 @@
     </footer>
 
     <script>
-        document.getElementById('bookingForm').addEventListener('submit', function (e) {
-            e.preventDefault();
+        document.getElementById('bookingForm').addEventListener('submit', function(event) {
+            event.preventDefault();
 
-            // Prepare data
             var formData = new FormData(this);
 
-            // Send form data to Google Apps Script Web App
-            fetch('https://script.google.com/macros/s/AKfycbyN_OCANva-q1s6DAPwSpB_KuS76x0kvvbwahkd5TECufIEWYkLlQ31ew1U4Q8wWQl8/exec', {
+            fetch('https://script.google.com/macros/s/AKfycbylp1ByJv7pDo8NyucH0n96AQWb8V4D7cKZjI2NCCr8Ftq1W5kfONiWi01h-eRDuOan/exec', {
                 method: 'POST',
                 body: formData
             })
             .then(response => response.json())
             .then(data => {
                 if (data.result === 'success') {
-                    alert('Your reservation has been submitted successfully!');
-                    document.getElementById('bookingForm').reset();  // Reset form after submission
+                    document.getElementById('responseMessage').textContent = 'Your reservation has been successfully submitted!';
                 } else {
-                    alert('There was an error: ' + data.message);
+                    document.getElementById('responseMessage').textContent = 'There was an error: ' + data.message;
                 }
             })
             .catch(error => {
-                console.error('Error:', error);
-                alert('There was an error. Please try again.');
+                document.getElementById('responseMessage').textContent = 'There was an error: ' + error.message;
             });
         });
     </script>
-
 </body>
 </html>
