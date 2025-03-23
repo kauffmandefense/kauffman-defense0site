@@ -11,59 +11,136 @@
             color: white;
             text-align: center;
         }
-        .nav {
-            background-color: #1c1c1c;
-            padding: 10px;
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
         }
-        .nav a {
-            color: white;
+        .facebook-section {
+            background-color: #1c1c1c;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .facebook-section a {
+            color: #1877f2;
             text-decoration: none;
-            margin: 0 15px;
+            font-size: 20px;
             font-weight: bold;
         }
-        .nav a:hover {
+        .facebook-section a:hover {
             text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <div class="nav">
-        <a href="index.html">Home</a>
-        <a href="what-to-bring.html">What to Bring</a>
-        <a href="faqs.html">FAQs</a>
-        <a href="contact.html">Contact Us</a>
-        <a href="join-mailing-list.html">Join Our Mailing List</a>
+    <div class="container">
+        <h1>Welcome to Kauffman Defense</h1>
+        <h2>Upcoming CPL Training Classes</h2>
+
+        <!-- Embedded Google Calendar -->
+        <iframe src="https://calendar.google.com/calendar/embed?src=b9f3dc7c29fde779d1256d194c7cebd80950cc3f0c3bd5e0e5fddbbf5dcb955f%40group.calendar.google.com&ctz=UTC" 
+            style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no">
+        </iframe>
+
+        <h2>Book Your CPL Training</h2>
+        <form id="cplForm">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" required><br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br>
+
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" required><br>
+
+            <label for="address">Home Address:</label>
+            <input type="text" id="address" name="address" required><br>
+
+            <!-- Class Type Selection -->
+            <label for="classType">Class Type:</label>
+            <select id="classType" name="classType" required>
+                <option value="Public">Public</option>
+                <option value="Private">Private</option>
+            </select><br>
+
+            <!-- Preferred Date (Only if Public Class is Selected) -->
+            <div id="dateSection">
+                <label for="preferredDate">Preferred Class Date (MM/DD/YYYY):</label>
+                <input type="text" id="preferredDate" name="preferredDate"><br>
+            </div>
+
+            <!-- Contact Method (Only if Private Class is Selected) -->
+            <div id="contactMethodSection" style="display: none;">
+                <label for="contactMethod">Preferred Contact Method:</label>
+                <select id="contactMethod" name="contactMethod">
+                    <option value="Phone Call">Phone Call</option>
+                    <option value="Text">Text</option>
+                    <option value="Email">Email</option>
+                </select><br>
+            </div>
+
+            <!-- Rental Pistol Selection -->
+            <label for="rentalPistol">Will you require a rental pistol? ($20 additional fee)</label>
+            <select id="rentalPistol" name="rentalPistol" required>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select><br>
+
+            <button type="submit">Continue</button>
+        </form>
+
+        <!-- Facebook Link Section -->
+        <section class="facebook-section">
+            <h2>Check Us Out on Facebook</h2>
+            <p>Stay updated on our latest class schedules and announcements.</p>
+            <a href="https://www.facebook.com/kauffmandefense" target="_blank">Visit Our Facebook Page</a>
+        </section>
     </div>
 
-    <h1>Welcome to Kauffman Defense</h1>
-    <h2>Upcoming CPL Training Classes</h2>
+    <script>
+        document.getElementById("classType").addEventListener("change", function() {
+            var classType = this.value;
+            var dateSection = document.getElementById("dateSection");
+            var contactMethodSection = document.getElementById("contactMethodSection");
+            var preferredDateInput = document.getElementById("preferredDate");
+            var contactMethodInput = document.getElementById("contactMethod");
 
-    <iframe src="https://calendar.google.com/calendar/embed?src=YOUR_CALENDAR_ID&ctz=UTC"
-        style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no">
-    </iframe>
+            if (classType === "Public") {
+                dateSection.style.display = "block";
+                contactMethodSection.style.display = "none";
+                preferredDateInput.required = true;
+                contactMethodInput.required = false;
+            } else {
+                dateSection.style.display = "none";
+                contactMethodSection.style.display = "block";
+                preferredDateInput.required = false;
+                contactMethodInput.required = true;
+            }
+        });
 
-    <h2>Book Your CPL Training</h2>
-    <form id="cplForm">
-        <label for="name">Full Name:</label>
-        <input type="text" id="name" name="name" required><br>
+        document.getElementById("cplForm").addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent default form submission behavior
 
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required><br>
+            let formData = new FormData(this);
 
-        <label for="phone">Phone Number:</label>
-        <input type="tel" id="phone" name="phone" required><br>
-
-        <label for="address">Home Address:</label>
-        <input type="text" id="address" name="address" required><br>
-
-        <button type="submit">Continue</button>
-    </form>
-
-    <section class="facebook-section">
-        <h2>Check Us Out on Facebook</h2>
-        <p>Stay updated on our latest class schedules and announcements.</p>
-        <a href="https://www.facebook.com/kauffmandefense" target="_blank">Visit Our Facebook Page</a>
-    </section>
-
+            fetch("https://script.google.com/macros/s/AKfycby3M9vHDcSoPpTzLOLlM55291cApFsjHWhgFlKaF2K0ywXHjhfAsIwhYhZ9yAQZPSy0/exec", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === "success") {
+                    alert("Form submitted successfully!");
+                    document.getElementById("cplForm").reset();
+                } else {
+                    alert("Error submitting form.");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("Error submitting form.");
+            });
+        });
+    </script>
 </body>
 </html>
