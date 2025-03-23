@@ -12,27 +12,24 @@
             text-align: center;
         }
         .container {
-            max-width: 600px;
+            width: 50%;
             margin: auto;
             padding: 20px;
-            background-color: #222;
-            border-radius: 10px;
+            border: 1px solid white;
         }
-        input, select, button {
+        label, input, select {
+            display: block;
             width: 100%;
-            padding: 10px;
-            margin: 5px 0;
-            border: none;
-            border-radius: 5px;
+            margin: 10px 0;
+            padding: 5px;
         }
         button {
-            background-color: red;
-            color: white;
-            font-size: 16px;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: white;
+            color: black;
+            border: none;
             cursor: pointer;
-        }
-        button:hover {
-            background-color: darkred;
         }
     </style>
 </head>
@@ -40,17 +37,19 @@
 
     <h1>Welcome to Kauffman Defense</h1>
     <h2>Upcoming CPL Training Classes</h2>
-    <iframe src="https://calendar.google.com/calendar/embed?src=b9f3dc7c29fde779d1256d194c7cebd80950cc3f0c3bd5e0e5fddbbf5dcb955f%40group.calendar.google.com&ctz=UTC"
-            style="border:solid 1px #777; width:800px; height:600px;" frameborder="0" scrolling="no">
+    
+    <iframe src="https://calendar.google.com/calendar/embed?src=b9f3dc7c29fde779d1256d194c7cebd80950cc3f0c3bd5e0e5fddbbf5dcb955f%40group.calendar.google.com&ctz=UTC" 
+        style="border: 0" width="100%" height="600" frameborder="0" scrolling="no">
     </iframe>
 
+    <h2>Book Your CPL Training</h2>
+    
     <div class="container">
-        <h2>Book Your CPL Training</h2>
-        <form id="bookingForm">
+        <form id="cplForm">
             <label for="name">Full Name:</label>
             <input type="text" id="name" name="name" required>
 
-            <label for="email">Email Address:</label>
+            <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
 
             <label for="phone">Phone Number:</label>
@@ -59,60 +58,74 @@
             <label for="address">Home Address:</label>
             <input type="text" id="address" name="address" required>
 
+            <!-- Class Type Selection -->
             <label for="classType">Class Type:</label>
-            <select id="classType" name="classType" required>
+            <select id="classType" name="classType" required onchange="toggleClassDetails()">
                 <option value="Public">Public</option>
                 <option value="Private">Private</option>
             </select>
 
-            <div id="publicClassDate">
-                <label for="classDate">Preferred Class Date (MM/DD/YYYY):</label>
-                <input type="text" id="classDate" name="classDate">
+            <!-- Public Class Date Selection -->
+            <div id="publicClassSection">
+                <label for="preferredDate">Preferred Class Date (MM/DD/YYYY):</label>
+                <input type="text" id="preferredDate" name="preferredDate">
             </div>
 
-            <div id="privateContactMethod" style="display:none;">
-                <label for="contactMethod">Preferred Contact Method:</label>
+            <!-- Private Class Contact Preference -->
+            <div id="privateClassSection" style="display: none;">
+                <label for="contactMethod">Preferred Contact Method for Private Class:</label>
                 <select id="contactMethod" name="contactMethod">
                     <option value="Phone Call">Phone Call</option>
-                    <option value="Text">Text</option>
+                    <option value="Text Message">Text Message</option>
                     <option value="Email">Email</option>
                 </select>
             </div>
 
-            <label for="rentalPistol">Do you need a rental pistol? ($20 fee)</label>
-            <select id="rentalPistol" name="rentalPistol" required>
+            <!-- Rental Pistol Selection -->
+            <label for="rentalPistol">Do you need a rental pistol? ($20 additional fee):</label>
+            <select id="rentalPistol" name="rentalPistol">
                 <option value="No">No</option>
                 <option value="Yes">Yes</option>
             </select>
 
             <button type="button" onclick="submitForm()">Continue</button>
         </form>
-
-        <p id="responseMessage"></p>
     </div>
 
     <script>
-        document.getElementById("classType").addEventListener("change", function() {
-            let classType = this.value;
-            document.getElementById("publicClassDate").style.display = (classType === "Public") ? "block" : "none";
-            document.getElementById("privateContactMethod").style.display = (classType === "Private") ? "block" : "none";
-        });
+        function toggleClassDetails() {
+            var classType = document.getElementById("classType").value;
+            document.getElementById("publicClassSection").style.display = (classType === "Public") ? "block" : "none";
+            document.getElementById("privateClassSection").style.display = (classType === "Private") ? "block" : "none";
+        }
 
         function submitForm() {
-            let form = document.getElementById("bookingForm");
-            let formData = new FormData(form);
+            var form = document.getElementById("cplForm");
+            var formData = new FormData(form);
 
-            fetch("https://script.google.com/macros/s/AKfycbw6ni32kDB4DVU94YX_WHDWBmiOaO9S-bJ8i8Px46XQUMc415YFSGsKJeR6bpfSLLMz/exec", {
+            // Convert FormData to an object
+            var data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            // Ensure empty fields are properly handled
+            data.preferredDate = data.preferredDate || "N/A";
+            data.contactMethod = data.contactMethod || "N/A";
+
+            fetch("https://script.google.com/macros/s/AKfycbzJkDNVojzkYUKffReNMZNNaFWSBzodytgxyZUOnVYC0kwsaWKs1p88IoS0FarMJp0j/exec", {
                 method: "POST",
-                body: formData
-            })
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById("responseMessage").innerText = data;
+                mode: "no-cors",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            }).then(response => {
+                alert("Form submitted successfully!");
                 form.reset();
-            })
-            .catch(error => {
-                document.getElementById("responseMessage").innerText = "Error submitting form.";
+            }).catch(error => {
+                alert("Error submitting form. Please try again.");
+                console.error("Submission error:", error);
             });
         }
     </script>
