@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - Kauffman Defense</title>
+    <title>Contact Us</title>
     <style>
         body {
             background-color: black;
@@ -11,46 +11,74 @@
             font-family: Arial, sans-serif;
             text-align: center;
         }
-        .nav {
-            background-color: #1c1c1c;
+        .form-container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            background-color: #222;
+            border-radius: 5px;
+        }
+        input {
+            width: 100%;
             padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
         }
-        .nav a {
+        button {
+            padding: 10px;
+            background-color: #555;
             color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
-        .nav a:hover {
-            text-decoration: underline;
-        }
-        input, button {
-            background-color: #333;
-            color: white;
-            border: 1px solid white;
-            padding: 5px;
-            margin: 5px;
+        button:hover {
+            background-color: #777;
         }
     </style>
 </head>
 <body>
-    <div class="nav">
-        <a href="index.html">Home</a>
-        <a href="what-to-bring.html">What to Bring</a>
-        <a href="faqs.html">FAQs</a>
-        <a href="contact.html">Contact Us</a>
-        <a href="join-mailing-list.html">Join Our Mailing List</a>
-    </div>
 
     <h1>Contact Us</h1>
-    <form action="https://formsubmit.co/kauffmandefense@gmail.com" method="POST">
-        <label for="name">Full Name:</label>
-        <input type="text" id="name" name="name" required><br>
+    <p>Have a question? Enter your details below, and we'll reach out within 24 hours.</p>
 
-        <label for="contact">Email or Phone:</label>
-        <input type="text" id="contact" name="contact" required><br>
+    <div class="form-container">
+        <form id="contactForm">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" required>
 
-        <button type="submit">Send Message</button>
-    </form>
+            <label for="email">Email or Phone:</label>
+            <input type="text" id="email" name="email" required>
+
+            <button type="submit">Send Message</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("contactForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            let formData = new FormData(this);
+
+            fetch("https://script.google.com/macros/s/AKfycbwEixrKxMfNK6mKu4ncZauUZYI6ENUzlF76QOeFAh7zH1oSwpwvRaTo1gvr7JIkiZpv/exec", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === "success") {
+                    window.location.href = "confirmation.html";
+                } else {
+                    alert("Error sending message. Please try again.");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("Error sending message.");
+            });
+        });
+    </script>
+
 </body>
 </html>
