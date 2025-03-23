@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>What to Bring - Kauffman Defense</title>
+    <title>What to Bring</title>
     <style>
         body {
             background-color: black;
@@ -11,31 +11,55 @@
             font-family: Arial, sans-serif;
             text-align: center;
         }
-        .nav {
-            background-color: #1c1c1c;
-            padding: 10px;
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: #222;
+            border-radius: 5px;
+            text-align: left;
         }
-        .nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
+        h1, h2 {
+            color: #f4c542;
+            text-align: center;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li::before {
+            content: "✔ ";
+            color: #f4c542;
+        }
+        .note {
+            font-style: italic;
+            color: #ccc;
+        }
+        .highlight {
+            color: #f4c542;
             font-weight: bold;
-        }
-        .nav a:hover {
-            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <div class="nav">
-        <a href="index.html">Home</a>
-        <a href="what-to-bring.html">What to Bring</a>
-        <a href="faqs.html">FAQs</a>
-        <a href="contact.html">Contact Us</a>
-        <a href="join-mailing-list.html">Join Our Mailing List</a>
-    </div>
 
-    <h1>What to Bring to Your Class</h1>
-    <p>Include information on what students should bring here.</p>
-</body>
-</html>
+    <h1>What to Bring to Class</h1>
+
+    <div class="container">
+        <h2>Required Items</h2>
+        <ul>
+            <li>Concealed Carry Pistol</li>
+            <li>100 Rounds of Ammunition</li>
+            <li>Ear Protection</li>
+            <li>Eye Protection</li>
+            <li>Notebook</li>
+            <li>Pen or Pencil</li>
+        </ul>
+
+        <h2>Optional Items</h2>
+        <ul>
+            <li>Holster</li>
+        </ul>
+
+        <h2>Rental Option</h2>
+        <p>If you do not have a firearm, we offer a <span class="highlight">.22 caliber pistol rental</span> for an additional fee of <span class="highlight">$20</span>. This rental includes
