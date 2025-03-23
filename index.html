@@ -12,71 +12,110 @@
             text-align: center;
         }
         .container {
-            width: 50%;
+            max-width: 600px;
             margin: auto;
             padding: 20px;
+            background-color: #222;
+            border-radius: 10px;
         }
         input, select, button {
-            display: block;
             width: 100%;
-            margin: 10px 0;
             padding: 10px;
-            font-size: 16px;
-        }
-        iframe {
-            width: 100%;
-            height: 600px;
+            margin: 5px 0;
             border: none;
+            border-radius: 5px;
+        }
+        button {
+            background-color: red;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: darkred;
         }
     </style>
 </head>
 <body>
 
     <h1>Welcome to Kauffman Defense</h1>
-
     <h2>Upcoming CPL Training Classes</h2>
-    <iframe src="https://calendar.google.com/calendar/embed?src=b9f3dc7c29fde779d1256d194c7cebd80950cc3f0c3bd5e0e5fddbbf5dcb955f%40group.calendar.google.com&ctz=UTC"></iframe>
+    <iframe src="https://calendar.google.com/calendar/embed?src=b9f3dc7c29fde779d1256d194c7cebd80950cc3f0c3bd5e0e5fddbbf5dcb955f%40group.calendar.google.com&ctz=UTC"
+            style="border:solid 1px #777; width:800px; height:600px;" frameborder="0" scrolling="no">
+    </iframe>
 
     <div class="container">
         <h2>Book Your CPL Training</h2>
         <form id="bookingForm">
-            <input type="text" id="name" placeholder="Full Name" required>
-            <input type="email" id="email" placeholder="Email Address" required>
-            <input type="text" id="phone" placeholder="Phone Number" required>
-            <input type="text" id="address" placeholder="Home Address" required>
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" required>
 
-            <label for="classType">Select Class Type:</label>
-            <select id="classType" required onchange="toggleClassOptions()">
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" required>
+
+            <label for="address">Home Address:</label>
+            <input type="text" id="address" name="address" required>
+
+            <label for="classType">Class Type:</label>
+            <select id="classType" name="classType" required>
                 <option value="Public">Public</option>
                 <option value="Private">Private</option>
             </select>
 
-            <div id="publicClassOptions">
-                <label for="classDate">Enter Course Date (MM/DD/YYYY):</label>
-                <input type="text" id="classDate" placeholder="MM/DD/YYYY">
+            <div id="publicClassDate">
+                <label for="classDate">Preferred Class Date (MM/DD/YYYY):</label>
+                <input type="text" id="classDate" name="classDate">
             </div>
 
-            <div id="privateClassOptions" style="display: none;">
+            <div id="privateContactMethod" style="display:none;">
                 <label for="contactMethod">Preferred Contact Method:</label>
-                <select id="contactMethod">
+                <select id="contactMethod" name="contactMethod">
                     <option value="Phone Call">Phone Call</option>
                     <option value="Text">Text</option>
                     <option value="Email">Email</option>
                 </select>
-                <p>We will reach out to discuss available dates.</p>
             </div>
 
-            <label for="rentalPistol">Do you need a rental pistol? ($20 additional fee)</label>
-            <select id="rentalPistol">
+            <label for="rentalPistol">Do you need a rental pistol? ($20 fee)</label>
+            <select id="rentalPistol" name="rentalPistol" required>
                 <option value="No">No</option>
                 <option value="Yes">Yes</option>
             </select>
 
             <button type="button" onclick="submitForm()">Continue</button>
         </form>
+
+        <p id="responseMessage"></p>
     </div>
 
     <script>
-        function toggleClassOptions() {
-            var classType = document.getElementById("classType").value;
-            document.getElementById
+        document.getElementById("classType").addEventListener("change", function() {
+            let classType = this.value;
+            document.getElementById("publicClassDate").style.display = (classType === "Public") ? "block" : "none";
+            document.getElementById("privateContactMethod").style.display = (classType === "Private") ? "block" : "none";
+        });
+
+        function submitForm() {
+            let form = document.getElementById("bookingForm");
+            let formData = new FormData(form);
+
+            fetch("https://script.google.com/macros/s/AKfycbw6ni32kDB4DVU94YX_WHDWBmiOaO9S-bJ8i8Px46XQUMc415YFSGsKJeR6bpfSLLMz/exec", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("responseMessage").innerText = data;
+                form.reset();
+            })
+            .catch(error => {
+                document.getElementById("responseMessage").innerText = "Error submitting form.";
+            });
+        }
+    </script>
+
+</body>
+</html>
