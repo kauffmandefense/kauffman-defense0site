@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>What to Bring</title>
+    <title>Join Our Mailing List</title>
     <style>
         body {
             background-color: black;
@@ -11,64 +11,75 @@
             font-family: Arial, sans-serif;
             text-align: center;
         }
-        .container {
-            max-width: 600px;
+        .form-container {
+            max-width: 400px;
             margin: auto;
             padding: 20px;
             background-color: #222;
             border-radius: 5px;
-            text-align: left;
         }
-        h1, h2 {
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px;
+            background-color: #555;
             color: white;
-            text-align: center;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        li::before {
-            content: "✔ ";
-            color: white;
-        }
-        .note {
-            font-style: italic;
-            color: #ccc;
-        }
-        .highlight {
-            color: white;
-            font-weight: bold;
+        button:hover {
+            background-color: #777;
         }
     </style>
 </head>
 <body>
 
-    <h1>What to Bring to Class</h1>
+    <h1>Join Our Mailing List</h1>
+    <p>Enter your details below to receive updates on new classes.</p>
 
-    <div class="container">
-        <h2>Required Items</h2>
-        <ul>
-            <li>Concealed Carry Pistol</li>
-            <li>100 Rounds of Ammunition</li>
-            <li>Ear Protection</li>
-            <li>Eye Protection</li>
-            <li>Notebook</li>
-            <li>Pen or Pencil</li>
-        </ul>
+    <div class="form-container">
+        <form id="mailingListForm">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" required>
 
-        <h2>Optional Items</h2>
-        <ul>
-            <li>Holster</li>
-        </ul>
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" name="email" required>
 
-        <h2>Rental Option</h2>
-        <p>If you do not have a firearm, we offer a <span class="highlight">.22 caliber pistol rental</span> for an additional fee of <span class="highlight">$20</span>. This fee includes the firearm and ammunition.</p>
-
-        <h2>Provided Amenities</h2>
-        <p>We provide a complimentary lunch consisting of a <span class="highlight">sandwich and chips</span>. Water and coffee will also be available throughout the class.</p>
-
-        <p class="note">If you have any dietary restrictions, please let us know at least 24 hours in advance.</p>
+            <button type="submit">Join</button>
+        </form>
     </div>
+
+    <script>
+        document.getElementById("mailingListForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            let formData = new FormData(this);
+
+            fetch("https://script.google.com/macros/s/AKfycbyXnL3mDAVX0HOQzqai2v_95uhTRJ2viASY8FbRqxuNnylrMvLsb9_9m3zjSE1IxqPB/exec", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === "success") {
+                    alert("You have been added to our mailing list!");
+                    document.getElementById("mailingListForm").reset();
+                } else {
+                    alert("Error joining mailing list. Please try again.");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("Error joining mailing list.");
+            });
+        });
+    </script>
 
 </body>
 </html>
