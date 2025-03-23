@@ -3,18 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kauffman Defense - Class Booking</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Kauffman Defense - CPL Training</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        section {
+            margin: 30px auto;
+            width: 80%;
+            max-width: 800px;
+            padding: 20px;
+            border: 1px solid white;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        form input, form label {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        form input {
+            padding: 8px;
+            background-color: black;
+            color: white;
+            border: 1px solid white;
+            border-radius: 5px;
+        }
+        button {
+            background-color: white;
+            color: black;
+            font-size: 18px;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: gray;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>Kauffman Defense</h1>
-        <p>Concealed Pistol License Training - Michigan</p>
-    </header>
 
+    <header>Kauffman Defense - CPL Training</header>
+
+    <!-- Upcoming Classes Section -->
+    <section id="calendar-section">
+        <h2>Upcoming CPL Training Classes</h2>
+        <p>View our upcoming class schedule below and book your spot today.</p>
+        <iframe src="YOUR_GOOGLE_CALENDAR_EMBED_URL" style="border: 0" width="100%" height="600" frameborder="0" scrolling="no"></iframe>
+    </section>
+
+    <!-- Booking Form Section -->
     <section id="booking-form">
-        <h2>Book a Class</h2>
-        <form id="classBookingForm">
+        <h2>Book Your CPL Training</h2>
+        <form id="bookingForm">
             <label for="name">Full Name:</label>
             <input type="text" id="name" name="name" required>
 
@@ -27,16 +81,55 @@
             <label for="address">Home Address:</label>
             <input type="text" id="address" name="address" required>
 
-            <label for="classSelection">Select a Class:</label>
-            <select id="classSelection" name="classSelection" required>
-                <option value="cpl-training">CPL Training Course</option>
-                <option value="safety-course">Firearm Safety Course</option>
-            </select>
-
-            <label for="rental">Will you require a rental pistol? ($20 fee)</label>
-            <select id="rental" name="rental">
-                <option value="No">No</option>
+            <label for="rental">Do you need a rental pistol? ($20 fee)</label>
+            <select id="rental" name="rental" required>
                 <option value="Yes">Yes</option>
+                <option value="No" selected>No</option>
             </select>
 
-            <button type="button" onclick="showConfirmation()">Continue</
+            <button type="button" onclick="showConfirmation()">Continue</button>
+        </form>
+    </section>
+
+    <!-- Confirmation Page (Hidden Until Continue is Clicked) -->
+    <section id="confirmation-section" style="display: none;">
+        <h2>Confirm Your Information</h2>
+        <p>Please review the details below before submitting.</p>
+        <div id="confirmation-details"></div>
+        <button type="button" onclick="submitForm()">Submit</button>
+    </section>
+
+    <script>
+        function showConfirmation() {
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const phone = document.getElementById("phone").value;
+            const address = document.getElementById("address").value;
+            const rental = document.getElementById("rental").value;
+
+            if (!name || !email || !phone || !address) {
+                alert("Please fill out all required fields.");
+                return;
+            }
+
+            const details = `
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Phone:</strong> ${phone}</p>
+                <p><strong>Address:</strong> ${address}</p>
+                <p><strong>Rental Pistol:</strong> ${rental}</p>
+            `;
+
+            document.getElementById("confirmation-details").innerHTML = details;
+            document.getElementById("booking-form").style.display = "none";
+            document.getElementById("confirmation-section").style.display = "block";
+        }
+
+        function submitForm() {
+            alert("Form submitted! You will receive an email confirmation shortly.");
+            // TODO: Add Google Sheets & Email Integration Here
+        }
+    </script>
+
+</body>
+</html>
