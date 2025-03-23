@@ -18,12 +18,16 @@
             background-color: #222;
             border-radius: 5px;
         }
-        input {
+        input, textarea {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
             border: none;
             border-radius: 5px;
+        }
+        textarea {
+            height: 100px;
+            resize: vertical;
         }
         button {
             padding: 10px;
@@ -51,6 +55,9 @@
             <label for="email">Email or Phone:</label>
             <input type="text" id="email" name="email" required>
 
+            <label for="message">Your Message:</label>
+            <textarea id="message" name="message" required></textarea>
+
             <button type="submit">Send Message</button>
         </form>
     </div>
@@ -61,7 +68,7 @@
 
             let formData = new FormData(this);
 
-            fetch("https://script.google.com/macros/s/AKfycbywMghMTrommx7FexJAsrfKE1pAp6Twg9jLytwOMIkBAjoSNWkenWEkSrxCujyV5VPR/exec", {
+            fetch("https://script.google.com/macros/s/AKfycbw1Bct3GIqX7dSy36cYjJMCJwD8QPSTV_j_rtjDMq1vHDzwwhHLKO0IYbc9CFb02lm-/exec", {
                 method: "POST",
                 body: formData
             })
