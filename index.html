@@ -7,6 +7,27 @@
     <meta name="description" content="Looking for CPL training in Gaylord, MI? Kauffman Defense offers expert Concealed Pistol License (CPL) courses to help you get certified and apply for your Michigan CPL.">
     <meta name="keywords" content="CPL training, Gaylord MI, Concealed Pistol License, Kauffman Defense, Michigan CPL, firearm safety training, concealed carry class">
     
+    <!-- Structured Data for Local Business -->
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Kauffman Defense",
+      "image": "YOUR_LOGO_URL",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "YOUR_STREET_ADDRESS",
+        "addressLocality": "Gaylord",
+        "addressRegion": "MI",
+        "postalCode": "49735",
+        "addressCountry": "US"
+      },
+      "telephone": "YOUR_PHONE_NUMBER",
+      "url": "YOUR_WEBSITE_URL",
+      "sameAs": "https://www.facebook.com/kauffmandefense"
+    }
+    </script>
+    
     <style>
         body {
             background-color: black;
@@ -44,7 +65,7 @@
             background-color: #222;
             border-radius: 5px;
         }
-        input, button, select {
+        input, button {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
@@ -87,6 +108,20 @@
     <div class="container">
         <h1>CPL Training in Gaylord, MI - Kauffman Defense</h1>
         <p>Looking for Concealed Pistol License (CPL) training in Gaylord, Michigan? Kauffman Defense offers top-quality CPL courses to help you get certified and apply for your Michigan CPL.</p>
+        <p>Learn from experienced instructors who will guide you through firearm safety, Michigan laws, and everything you need to know to apply for your CPL.</p>
+    </div>
+
+    <!-- Embedded Google Calendar -->
+    <div class="calendar-container">
+        <h2>Upcoming CPL Classes</h2>
+        <iframe 
+            src="https://calendar.google.com/calendar/embed?src=b9f3dc7c29fde779d1256d194c7cebd80950cc3f0c3bd5e0e5fddbbf5dcb955f%40group.calendar.google.com&ctz=America%2FNew_York" 
+            style="border: 0" 
+            width="800" 
+            height="600" 
+            frameborder="0" 
+            scrolling="no">
+        </iframe>
     </div>
 
     <!-- Booking Form -->
@@ -106,27 +141,25 @@
             <input type="text" id="address" name="address" required>
 
             <label for="classType">Class Type:</label>
-            <select id="classType" name="classType">
-                <option value="public" selected>Public Class</option>
-                <option value="private">Private Class</option>
+            <select id="classType" name="classType" required>
+                <option value="Public">Public (default)</option>
+                <option value="Private">Private</option>
             </select>
 
             <label for="preferredDate">Preferred Date:</label>
             <input type="date" id="preferredDate" name="preferredDate" required>
 
             <label for="contactMethod">Preferred Contact Method:</label>
-            <select id="contactMethod" name="contactMethod">
-                <option value="email" selected>Email</option>
-                <option value="phone">Phone</option>
+            <select id="contactMethod" name="contactMethod" required>
+                <option value="Email">Email</option>
+                <option value="Phone">Phone</option>
             </select>
 
-            <label for="rentalPistol">Do you need a rental pistol? ($20 fee):</label>
-            <select id="rentalPistol" name="rentalPistol">
-                <option value="yes">Yes</option>
-                <option value="no" selected>No</option>
+            <label for="rentalPistol">Do you need a rental pistol? (Additional $20):</label>
+            <select id="rentalPistol" name="rentalPistol" required>
+                <option value="No">No</option>
+                <option value="Yes">Yes</option>
             </select>
-
-            <p><strong>Disclaimer:</strong> A rental pistol costs an additional $20. You will be charged for the rental at the time of the class.</p>
 
             <button type="submit">Submit Reservation</button>
         </form>
@@ -143,7 +176,6 @@
         <p>&copy; 2025 Kauffman Defense. All rights reserved. Located in Gaylord, MI.</p>
     </footer>
 
-    <!-- Include the Google Apps Script POST handling JavaScript -->
     <script>
         document.getElementById('bookingForm').addEventListener('submit', function (e) {
             e.preventDefault();
@@ -152,7 +184,7 @@
             var formData = new FormData(this);
 
             // Send form data to Google Apps Script Web App
-            fetch('https://script.google.com/macros/s/AKfycbxlBgtTqaKTS-Nbmm6DuaCTI_CH5eXX8Rb4eBdpJWZZHRRJlddUzdeOiD8Whxje5WoW/exec', {
+            fetch('https://script.google.com/macros/s/AKfycbyN_OCANva-q1s6DAPwSpB_KuS76x0kvvbwahkd5TECufIEWYkLlQ31ew1U4Q8wWQl8/exec', {
                 method: 'POST',
                 body: formData
             })
@@ -160,8 +192,9 @@
             .then(data => {
                 if (data.result === 'success') {
                     alert('Your reservation has been submitted successfully!');
+                    document.getElementById('bookingForm').reset();  // Reset form after submission
                 } else {
-                    alert('There was an error. Please try again.');
+                    alert('There was an error: ' + data.message);
                 }
             })
             .catch(error => {
@@ -170,5 +203,6 @@
             });
         });
     </script>
+
 </body>
 </html>
