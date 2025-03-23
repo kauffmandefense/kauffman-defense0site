@@ -7,27 +7,6 @@
     <meta name="description" content="Looking for CPL training in Gaylord, MI? Kauffman Defense offers expert Concealed Pistol License (CPL) courses to help you get certified and apply for your Michigan CPL.">
     <meta name="keywords" content="CPL training, Gaylord MI, Concealed Pistol License, Kauffman Defense, Michigan CPL, firearm safety training, concealed carry class">
     
-    <!-- Structured Data for Local Business -->
-    <script type="application/ld+json">
-    {
-      "@context": "http://schema.org",
-      "@type": "LocalBusiness",
-      "name": "Kauffman Defense",
-      "image": "YOUR_LOGO_URL",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "YOUR_STREET_ADDRESS",
-        "addressLocality": "Gaylord",
-        "addressRegion": "MI",
-        "postalCode": "49735",
-        "addressCountry": "US"
-      },
-      "telephone": "YOUR_PHONE_NUMBER",
-      "url": "YOUR_WEBSITE_URL",
-      "sameAs": "https://www.facebook.com/kauffmandefense"
-    }
-    </script>
-    
     <style>
         body {
             background-color: black;
@@ -65,7 +44,7 @@
             background-color: #222;
             border-radius: 5px;
         }
-        input, select, button {
+        input, button, select {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
@@ -108,20 +87,6 @@
     <div class="container">
         <h1>CPL Training in Gaylord, MI - Kauffman Defense</h1>
         <p>Looking for Concealed Pistol License (CPL) training in Gaylord, Michigan? Kauffman Defense offers top-quality CPL courses to help you get certified and apply for your Michigan CPL.</p>
-        <p>Learn from experienced instructors who will guide you through firearm safety, Michigan laws, and everything you need to know to apply for your CPL.</p>
-    </div>
-
-    <!-- Embedded Google Calendar -->
-    <div class="calendar-container">
-        <h2>Upcoming CPL Classes</h2>
-        <iframe 
-            src="https://calendar.google.com/calendar/embed?src=b9f3dc7c29fde779d1256d194c7cebd80950cc3f0c3bd5e0e5fddbbf5dcb955f%40group.calendar.google.com&ctz=America%2FNew_York" 
-            style="border: 0" 
-            width="800" 
-            height="600" 
-            frameborder="0" 
-            scrolling="no">
-        </iframe>
     </div>
 
     <!-- Booking Form -->
@@ -178,5 +143,32 @@
         <p>&copy; 2025 Kauffman Defense. All rights reserved. Located in Gaylord, MI.</p>
     </footer>
 
+    <!-- Include the Google Apps Script POST handling JavaScript -->
+    <script>
+        document.getElementById('bookingForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Prepare data
+            var formData = new FormData(this);
+
+            // Send form data to Google Apps Script Web App
+            fetch('https://script.google.com/macros/s/AKfycbxlBgtTqaKTS-Nbmm6DuaCTI_CH5eXX8Rb4eBdpJWZZHRRJlddUzdeOiD8Whxje5WoW/exec', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === 'success') {
+                    alert('Your reservation has been submitted successfully!');
+                } else {
+                    alert('There was an error. Please try again.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('There was an error. Please try again.');
+            });
+        });
+    </script>
 </body>
 </html>
