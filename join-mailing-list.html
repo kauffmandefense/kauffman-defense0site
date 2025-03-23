@@ -36,30 +36,12 @@
         button:hover {
             background-color: #777;
         }
-        nav {
-            margin-bottom: 20px;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-        }
-        nav a:hover {
-            text-decoration: underline;
-        }
     </style>
 </head>
 <body>
 
     <h1>Join Our Mailing List</h1>
-    <p>Stay updated on our latest classes and events. Enter your details below to join our mailing list.</p>
-
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="what-to-bring.html">What to Bring</a>
-        <a href="faq.html">FAQs</a>
-        <a href="contact.html">Contact Us</a>
-    </nav>
+    <p>Enter your details below to receive updates on new classes.</p>
 
     <div class="form-container">
         <form id="mailingListForm">
@@ -69,7 +51,7 @@
             <label for="email">Email Address:</label>
             <input type="email" id="email" name="email" required>
 
-            <button type="submit">Join Mailing List</button>
+            <button type="submit">Join</button>
         </form>
     </div>
 
@@ -79,7 +61,7 @@
 
             let formData = new FormData(this);
 
-            fetch("YOUR_GOOGLE_APPS_SCRIPT_URL", {
+            fetch("https://script.google.com/macros/s/AKfycbxl82tkIGdf1Dj0dTfIlsgOxlEzvrzo-KBm3Hd8ynSUbVVmXts1YawxefKCnw6G-fjX/exec", {
                 method: "POST",
                 body: formData
             })
@@ -89,12 +71,12 @@
                     alert("You have been added to our mailing list!");
                     document.getElementById("mailingListForm").reset();
                 } else {
-                    alert("Error adding to mailing list. Please try again.");
+                    alert("Error joining mailing list. Please try again.");
                 }
             })
             .catch(error => {
                 console.error("Error:", error);
-                alert("Error adding to mailing list.");
+                alert("Error joining mailing list.");
             });
         });
     </script>
