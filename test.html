@@ -134,7 +134,7 @@
         <p>Learn from experienced instructors who will guide you through firearm safety, Michigan laws, and everything you need to know to apply for your CPL.</p>
     </div>
 
-    <!-- Google Calendar Embed -->
+    <!-- Google Calendar Embed NEEDS UPDATE WITH NEW CALENDAR-->
     <div class="container">
         <h2>Upcoming Classes</h2>
         <iframe src="https://calendar.google.com/calendar/embed?src=b9f3dc7c29fde779d1256d194c7cebd80950cc3f0c3bd5e0e5fddbbf5dcb955f@group.calendar.google.com&ctz=America%2FDetroit" 
@@ -163,37 +163,41 @@
         <h2>Reserve Your Spot for CPL Training</h2>
         <form id="bookingForm">
             <label for="name">Full Name:</label>
-            <input type="text" id="name" name="name" required>
+<input type="text" id="firstName" name="firstName" required>
+<input type="text" id="lastName" name="lastName" required>
 
-            <label for="email">Email Address:</label>
-            <input type="email" id="email" name="email" required>
+<label for="email">Email Address:</label>
+<input type="email" id="email" name="email" required>
 
-            <label for="phone">Phone Number:</label>
-            <input type="text" id="phone" name="phone" required>
+<label for="phone">Phone Number:</label>
+<input type="text" id="phone" name="phone" required>
 
-            <label for="address">Home Address:</label>
-            <input type="text" id="address" name="address" required>
+<label for="address">Address:</label>
+<input type="text" id="address" name="address" required>
 
-            <label for="classType">Class Type:</label>
-            <select id="classType" name="classType">
-                <option value="Public">Public (default)</option>
-                <option value="Private">Private</option>
-            </select>
+<label for="classType">Private or Public:</label>
+<select id="classType" name="classType">
+    <option value="Private">Private</option>
+    <option value="Public">Public</option>
+</select>
 
-            <label for="preferredDate">Preferred Date:</label>
-            <input type="date" id="preferredDate" name="preferredDate" required>
+<label for="preferredDate">If Public - Date:</label>
+<input type="date" id="preferredDate" name="preferredDate" required>
 
-            <label for="contactMethod">Preferred Contact Method:</label>
-            <select id="contactMethod" name="contactMethod">
-                <option value="Email">Email</option>
-                <option value="Phone">Phone</option>
-            </select>
+<label for="proposedDateRange">If Private - Proposed Date Range:</label>
+<input type="text" id="proposedDateRange" name="proposedDateRange" required>
 
-            <label for="rentalPistol">Do you need a rental pistol? ($20 fee):</label>
-            <select id="rentalPistol" name="rentalPistol">
-                <option value="No">No</option>
-                <option value="Yes">Yes</option>
-            </select>
+<label for="contactMethod">Preferred Contact Method:</label>
+<select id="contactMethod" name="contactMethod">
+    <option value="Email">Email</option>
+    <option value="Phone">Phone</option>
+</select>
+
+<label for="rentalPistol">Rental Required:</label>
+<select id="rentalPistol" name="rentalPistol">
+    <option value="No">No</option>
+    <option value="Yes">Yes</option>
+</select>
 
             <button type="submit">Submit Reservation</button>
         </form>
