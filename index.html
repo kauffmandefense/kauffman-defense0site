@@ -6,11 +6,11 @@
     <title>CPL Training in Gaylord, MI - Kauffman Defense</title>
     <meta name="description" content="Looking for CPL training in Gaylord, MI? Kauffman Defense offers expert Concealed Pistol License (CPL) courses to help you get certified and apply for your Michigan CPL.">
     <meta name="keywords" content="CPL training, Gaylord MI, Concealed Pistol License, Kauffman Defense, Michigan CPL, firearm safety training, concealed carry class">
-
+    
     <style>
         body {
-            background-color: black;
-            color: white;
+            background-color: #121212; /* Change the body color for better contrast */
+            color: #fefefe; /* Keep the text color bright for readability */
             font-family: Arial, sans-serif;
             text-align: center;
             margin: 0;
@@ -22,7 +22,7 @@
             padding: 10px 0;
         }
         .navbar a {
-            color: white;
+            color: #fff;
             text-decoration: none;
             padding: 14px 20px;
             display: inline-block;
@@ -75,7 +75,39 @@
         .fb-button:hover {
             background-color: #145dbf;
         }
+
+        /* Responsive styles for mobile */
+        @media (max-width: 768px) {
+            .navbar a {
+                display: block; /* Each link takes up the full width */
+                text-align: left; /* Align the text to the left */
+                padding: 10px; /* Padding for touch targets */
+            }
+            .container, .booking-section, .navbar {
+                padding: 10px; /* Add padding for better spacing */
+            }
+            iframe {
+                width: 100%; /* Make the iframe responsive */
+            }
+        }
     </style>
+
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Kauffman Defense",
+        "description": "CPL Training in Gaylord, MI",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Gaylord",
+            "addressRegion": "MI"
+        },
+        "url": "http://www.kauffmandefense.com",  // Replace with your website URL
+        "telephone": "+1-989-464-7987"  // Replace with your contact number
+    }
+    </script>
 </head>
 <body>
 
@@ -104,7 +136,24 @@
         <iframe src="https://calendar.google.com/calendar/embed?src=b9f3dc7c29fde779d1256d194c7cebd80950cc3f0c3bd5e0e5fddbbf5dcb955f@group.calendar.google.com&ctz=America%2FDetroit" 
                 style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
     </div>
-
+<!-- Facebook Page Feed -->
+    <div class="facebook-feed">
+        <h2>Follow Us on Facebook</h2>
+        <div class="fb-page" 
+             data-href="https://www.facebook.com/kauffmandefense" 
+             data-tabs="timeline" 
+             data-width="340" 
+             data-height="500" 
+             data-small-header="false" 
+             data-adapt-container-width="true" 
+             data-hide-cover="false" 
+             data-show-facepile="true">
+          <blockquote cite="https://www.facebook.com/kauffmandefense" class="fb-xfbml-parse-ignore">
+              <a href="https://www.facebook.com/kauffmandefense">Facebook Page</a>
+          </blockquote>
+        </div>
+    </div>
+    
     <!-- Booking Form -->
     <div class="booking-section">
         <h2>Reserve Your Spot for CPL Training</h2>
@@ -157,7 +206,10 @@
     <footer>
         <p>&copy; 2025 Kauffman Defense. All rights reserved. Located in Gaylord, MI.</p>
     </footer>
-
+<!-- Insert the Facebook SDK here -->
+    <div id="fb-root"></div> <!-- Necessary for Facebook functionality -->
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v11.0"></script>
+   
     <script>
         document.getElementById('bookingForm').addEventListener('submit', function(event) {
             event.preventDefault();
