@@ -136,7 +136,24 @@
         <iframe src="https://calendar.google.com/calendar/embed?src=b9f3dc7c29fde779d1256d194c7cebd80950cc3f0c3bd5e0e5fddbbf5dcb955f@group.calendar.google.com&ctz=America%2FDetroit" 
                 style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
     </div>
-
+<!-- Facebook Page Feed -->
+    <div class="facebook-feed">
+        <h2>Follow Us on Facebook</h2>
+        <div class="fb-page" 
+             data-href="https://www.facebook.com/kauffmandefense" 
+             data-tabs="timeline" 
+             data-width="340" 
+             data-height="500" 
+             data-small-header="false" 
+             data-adapt-container-width="true" 
+             data-hide-cover="false" 
+             data-show-facepile="true">
+          <blockquote cite="https://www.facebook.com/kauffmandefense" class="fb-xfbml-parse-ignore">
+              <a href="https://www.facebook.com/kauffmandefense">Facebook Page</a>
+          </blockquote>
+        </div>
+    </div>
+    
     <!-- Booking Form -->
     <div class="booking-section">
         <h2>Reserve Your Spot for CPL Training</h2>
@@ -189,7 +206,10 @@
     <footer>
         <p>&copy; 2025 Kauffman Defense. All rights reserved. Located in Gaylord, MI.</p>
     </footer>
-
+<!-- Insert the Facebook SDK here -->
+    <div id="fb-root"></div> <!-- Necessary for Facebook functionality -->
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v11.0"></script>
+   
     <script>
         document.getElementById('bookingForm').addEventListener('submit', function(event) {
             event.preventDefault();
