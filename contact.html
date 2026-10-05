@@ -41,9 +41,10 @@
             margin: 10px 0;
             border: none;
             border-radius: 5px;
+            box-sizing: border-box;
         }
         textarea {
-            height: 100px;
+            height: 120px;
             resize: vertical;
         }
         button {
@@ -74,7 +75,7 @@
 </head>
 <body>
 
-<!-- Navigation Bar -->
+    <!-- Navigation Bar -->
     <div class="navbar">
         <a href="index.html">Home</a>
         <a href="about.html">About Us</a>
@@ -120,6 +121,21 @@
     </div>
 
     <script>
+        // Check URL for item parameters and pre-fill message textarea
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const itemTitle = urlParams.get('item');
+            const itemSku = urlParams.get('sku');
+
+            if (itemTitle && itemSku) {
+                const messageField = document.getElementById('message');
+                if (messageField) {
+                    messageField.value = `I am interested in inquiring/reserving the following item:\n\nItem: ${itemTitle}\nSKU: ${itemSku}\n\nPlease let me know availability and next steps for pickup or transfer.`;
+                }
+            }
+        });
+
+        // Form submission handling
         document.getElementById("contactForm").addEventListener("submit", function(event) {
             event.preventDefault();
 
