@@ -4,9 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventory & Products - Kauffman Defense</title>
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <link rel="stylesheet" href="style.css">
     <style>
+        body {
+            background-color: #121212;
+            color: #fefefe;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
         .navbar {
             background-color: #222;
             overflow: hidden;
@@ -22,26 +29,32 @@
             background-color: #555;
         }
 
-        .product-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
+        .container {
             padding: 20px;
             max-width: 1200px;
             margin: 0 auto;
         }
 
+        .product-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px 0;
+            margin: 0 auto;
+        }
+
         .product-card {
-            background-color: #333;
-            border-radius: 10px;
-            padding: 20px;
+            background-color: #222;
+            border-radius: 8px;
+            padding: 15px;
             width: 300px;
             text-align: left;
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            border: 1px solid #333;
         }
 
         .product-card img {
@@ -49,31 +62,33 @@
             height: 200px;
             object-fit: cover;
             border-radius: 5px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            background-color: #111;
         }
 
         .product-card h3 {
-            margin: 10px 0 5px 0;
-            font-size: 1.2em;
+            margin: 5px 0;
+            font-size: 1.15em;
+            color: #fff;
         }
 
         .sku {
             color: #aaa;
             font-size: 0.85em;
-            margin: 0 0 10px 0;
+            margin: 0 0 8px 0;
         }
 
         .price {
-            font-size: 1.3em;
+            font-size: 1.25em;
             font-weight: bold;
             color: #28a745;
             margin: 5px 0 10px 0;
         }
 
         .description {
-            font-size: 0.95em;
+            font-size: 0.9em;
             line-height: 1.4;
-            color: #ddd;
+            color: #ccc;
             margin-bottom: 15px;
             flex-grow: 1;
         }
@@ -106,15 +121,24 @@
         .disclaimer {
             font-size: 0.85em;
             color: #aaa;
-            margin-top: 20px;
+            margin-top: 15px;
         }
 
-        /* Mobile layout styling */
+        footer {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #222;
+        }
+
         @media (max-width: 768px) {
             .navbar a {
                 display: block;
                 text-align: left;
                 padding: 10px;
+            }
+            .product-card {
+                width: 100%;
+                max-width: 350px;
             }
         }
     </style>
@@ -136,7 +160,7 @@
     <!-- Main Content -->
     <div class="container">
         <h1>Current Inventory & Products</h1>
-        <p>Browse available inventory below. To inquire or reserve an item, click the button to email us directly.</p>
+        <p>Browse available inventory and shop services below. To inquire or reserve an item, click the button to contact us directly.</p>
         <p class="disclaimer">*Firearm sales require Form 4473 and background check at our Gaylord location. Must be 21+ for handguns / 18+ for long guns.</p>
 
         <!-- Product Grid -->
@@ -149,9 +173,9 @@
         <p>&copy; 2026 Kauffman Defense. All rights reserved. Located in Gaylord, MI.</p>
     </footer>
 
-<!-- Script to render products from CMS -->
+    <!-- Script to render and sort products -->
     <script>
-      fetch('/products.json')
+      fetch('products.json')
         .then(response => response.json())
         .then(products => {
           const grid = document.getElementById('product-grid');
@@ -159,16 +183,24 @@
             grid.innerHTML = '<p>No items currently listed. Check back soon!</p>';
             return;
           }
+
+          // Sort items so "Firearms" always appear first
+          products.sort((a, b) => {
+            if (a.category === 'Firearms' && b.category !== 'Firearms') return -1;
+            if (a.category !== 'Firearms' && b.category === 'Firearms') return 1;
+            return 0;
+          });
           
           grid.innerHTML = products.map(item => {
             const itemTitle = item.title || 'Inventory Item';
             const itemSku = item.id || 'N/A';
             const inquireUrl = `contact.html?item=${encodeURIComponent(itemTitle)}&sku=${encodeURIComponent(itemSku)}`;
+            const imageHtml = item.image ? `<img src="${item.image}" alt="${itemTitle}">` : '';
 
             return `
               <div class="product-card">
                 <div>
-                  ${item.image ? `<img src="${item.image}" alt="${itemTitle}">` : ''}
+                  ${imageHtml}
                   <h3>${itemTitle}</h3>
                   <p class="sku">SKU: ${itemSku}</p>
                   <p class="price">${item.price || ''}</p>
