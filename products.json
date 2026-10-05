@@ -1,19 +1,37 @@
 [
   {
-    "id": "KD-1001",
-    "title": "CPL Training Class / Private Instruction",
-    "price": "Contact for Pricing",
-    "category": "Services",
-    "description": "Professional CPL training certified in Michigan.",
-    "image": "",
-    "inStock": true
-  },
-  {
     "id": "KD-1002",
     "title": "Glock 43 9mm",
     "price": "$450.00",
     "category": "Firearms",
     "description": "Glock 43 9mm handgun. Includes six round magazine. Low round count.",
+    "image": "images/inventory/glock-43.jpg",
+    "inStock": true
+  },
+  {
+    "id": "KD-1001",
+    "title": "CPL Training Class / Private Instruction",
+    "price": "Contact for Pricing",
+    "category": "Services",
+    "description": "Professional CPL training certified in Michigan. Includes range instruction and classroom materials.",
+    "image": "",
+    "inStock": true
+  },
+  {
+    "id": "KD-1003",
+    "title": "FFL Firearm Transfer Service",
+    "price": "$25.00",
+    "category": "Services",
+    "description": "Standard inbound/outbound FFL transfer service for firearms, handguns, receivers, and frames.",
+    "image": "",
+    "inStock": true
+  },
+  {
+    "id": "KD-1004",
+    "title": "Custom Gunsmithing Services",
+    "price": "Quote on Request",
+    "category": "Services",
+    "description": "Pistol sight installation, trigger shoe/spring upgrades, slide disassembly, and general firearm maintenance.",
     "image": "",
     "inStock": true
   }
