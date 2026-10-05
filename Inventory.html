@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory & Products - Kauffman Defense</title>
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .product-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background-color: #333;
+            border-radius: 10px;
+            padding: 20px;
+            width: 300px;
+            text-align: left;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .product-card h3 {
+            margin: 10px 0 5px 0;
+            font-size: 1.2em;
+        }
+
+        .sku {
+            color: #aaa;
+            font-size: 0.85em;
+            margin: 0 0 10px 0;
+        }
+
+        .price {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #28a745;
+            margin: 5px 0 10px 0;
+        }
+
+        .description {
+            font-size: 0.95em;
+            line-height: 1.4;
+            color: #ddd;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .inquire-btn {
+            display: block;
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .inquire-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .badge-sold {
+            display: block;
+            background-color: #dc3545;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .disclaimer {
+            font-size: 0.85em;
+            color: #aaa;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="classes.html">Classes Offered</a>
+        <a href="inventory.html" style="background-color: #555;">Inventory</a>
+        <a href="resources.html">Resources</a>
+        <a href="what-to-bring.html">What to Bring</a>
+        <a href="faqs.html">FAQ</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="join-mailing-list.html">Join Mailing List</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1>Current Inventory & Products</h1>
+        <p>Browse available inventory below. To inquire or reserve an item, click the button to email us directly.</p>
+        <p class="disclaimer">*Firearm sales require Form 4473 and background check at our Gaylord location. Must be 21+ for handguns / 18+ for long guns.</p>
+
+        <!-- Product Grid -->
+        <div id="product-grid" class="product-grid">
+            <p>Loading inventory...</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Kauffman Defense. All rights reserved. Located in Gaylord, MI.</p>
+    </footer>
+
+    <!-- Script to render products from CMS -->
+    <script>
+      fetch('/products.json')
+        .then(response => response.json())
+        .then(products => {
+          const grid = document.getElementById('product-grid');
+          if (!products || products.length === 0) {
+            grid.innerHTML = '<p>No items currently listed. Check back soon!</p>';
+            return;
+          }
+          
+          grid.innerHTML = products.map(item => `
+            <div class="product-card">
+              <div>
+                ${item.image ? `<img src="${item.image}" alt="${item.title}">` : ''}
+                <h3>${item.title}</h3>
+                <p class="sku">SKU: ${item.id}</p>
+                <p class="price">${item.price}</p>
+                <p class="description">${item.description || ''}</p>
+              </div>
+              <div>
+                ${item.inStock ? 
+                  `<a href="mailto:info@kauffmandefense.com?subject=Inquiry:%20${encodeURIComponent(item.title)}\%20(SKU:\%20${item.id})" class="inquire-btn">Inquire / Reserve</a>` : 
+                  `<span class="badge-sold">OUT OF STOCK / RESERVED</span>`
+                }
+              </div>
+            </div>
+          `).join('');
+        })
+        .catch(err => {
+            console.error('Error loading products:', err);
+            document.getElementById('product-grid').innerHTML = '<p>Unable to load inventory at this time. Please email or message us directly.</p>';
+        });
+    </script>
+</body>
+</html>
