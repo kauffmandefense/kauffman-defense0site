@@ -34,5 +34,23 @@
     "description": "Pistol sight installation, trigger shoe/spring upgrades, slide disassembly, and general firearm maintenance.",
     "image": "",
     "inStock": true
-  }
+  },
+  {
+  "id": "KD-1005",
+  "title": "Scope Mounting",
+  "price": "$30.00",
+  "category": "Services",
+  "description": "Scope mounting in either 30mm or 1 inch tubes",
+  "image": "",
+  "inStock": true
+},
+  {
+  "id": "KD-1005",
+  "title": "Custom Builds",
+  "price": "Quote on Request",
+  "category": "Services",
+  "description": "Custom builds to your specification. We specialize in AR15, AR10, AR9 and AR45 platforms.",
+  "image": "",
+  "inStock": true
+}
 ]
