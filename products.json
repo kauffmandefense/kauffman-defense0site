@@ -8,4 +8,13 @@
     "image": "",
     "inStock": true
   }
+  {
+    "id": "KD-1002",
+    "title": "Glock 43 9mm",
+    "price": "$450.00",
+    "category": "Firearms",
+    "description": "Glock 43 9mm handgun. Includes six round magazine. Low round count.",
+    "image": "",
+    "inStock": true
+  }
 ]
