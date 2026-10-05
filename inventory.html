@@ -7,6 +7,21 @@
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <link rel="stylesheet" href="style.css">
     <style>
+        .navbar {
+            background-color: #222;
+            overflow: hidden;
+            padding: 10px 0;
+        }
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            padding: 14px 20px;
+            display: inline-block;
+        }
+        .navbar a:hover {
+            background-color: #555;
+        }
+
         .product-grid {
             display: flex;
             flex-wrap: wrap;
@@ -93,6 +108,15 @@
             color: #aaa;
             margin-top: 20px;
         }
+
+        /* Mobile layout styling */
+        @media (max-width: 768px) {
+            .navbar a {
+                display: block;
+                text-align: left;
+                padding: 10px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -102,7 +126,7 @@
         <a href="index.html">Home</a>
         <a href="about.html">About Us</a>
         <a href="classes.html">Classes Offered</a>
-        <a href="inventory.html" style="background-color: #555;">Inventory</a>
+        <a href="Inventory.html" style="background-color: #555;">Inventory</a>
         <a href="resources.html">Resources</a>
         <a href="what-to-bring.html">What to Bring</a>
         <a href="faqs.html">FAQ</a>
