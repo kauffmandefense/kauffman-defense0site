@@ -45,11 +45,20 @@
   "inStock": true
 },
   {
-  "id": "KD-1005",
+  "id": "KD-1006",
   "title": "Custom Builds",
   "price": "Quote on Request",
   "category": "Services",
   "description": "Custom builds to your specification. We specialize in AR15, AR10, and AR9 platforms.",
+  "image": "",
+  "inStock": true
+},
+  {
+  "id": "KD-1007",
+  "title": "Out of Stock? No Problem!",
+  "price": "Quote on Request",
+  "category": "Firearms",
+  "description": "We have several dealer accounts. If there is something you are looking for, we may be able to get it for ya!",
   "image": "",
   "inStock": true
 }
