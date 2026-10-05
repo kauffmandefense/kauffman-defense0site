@@ -13,7 +13,7 @@
     "title": "CPL Training Class / Private Instruction",
     "price": "Contact for Pricing",
     "category": "Services",
-    "description": "Professional CPL training certified in Michigan. Includes range instruction and classroom materials.",
+    "description": "Professional CPL training certified in Michigan. Includes range instruction and classroom materials. Public classes are posted to the calendar and our Facebook page. Private classes are available, our location or yours, for no additional cost. Minimum of four students required for private classes.",
     "image": "",
     "inStock": true
   },
@@ -22,7 +22,7 @@
     "title": "FFL Firearm Transfer Service",
     "price": "$25.00",
     "category": "Services",
-    "description": "Standard inbound/outbound FFL transfer service for firearms, handguns, receivers, and frames.",
+    "description": "Standard inbound/outbound FFL transfer service for firearms, handguns, receivers, and frames. Additional shipping fees apply to outbound transfers.",
     "image": "",
     "inStock": true
   },
@@ -40,7 +40,7 @@
   "title": "Scope Mounting",
   "price": "$30.00",
   "category": "Services",
-  "description": "Scope mounting in either 30mm or 1 inch tubes",
+  "description": "Scope mounting in either 30mm or 1 inch tubes. Includes boresighting.",
   "image": "",
   "inStock": true
 },
@@ -49,7 +49,7 @@
   "title": "Custom Builds",
   "price": "Quote on Request",
   "category": "Services",
-  "description": "Custom builds to your specification. We specialize in AR15, AR10, AR9 and AR45 platforms.",
+  "description": "Custom builds to your specification. We specialize in AR15, AR10, and AR9 platforms.",
   "image": "",
   "inStock": true
 }
