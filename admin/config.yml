@@ -6,16 +6,16 @@ media_folder: "images/uploads"
 public_folder: "/images/uploads"
 
 collections:
-  - name: "inventory"
+  - name: "inventory_catalog"
     label: "Inventory / Products"
     files:
       - name: "products_file"
-        label: "Product Catalog"
+        label: "Product Catalog List"
         file: "products.json"
         description: "Manage physical products and services catalog"
         fields:
-          - label: "Products"
-            name: "products"
+          - label: "Products List"
+            name: "items"
             widget: "list"
             fields:
               - { label: "SKU / Item #", name: "id", widget: "string" }
