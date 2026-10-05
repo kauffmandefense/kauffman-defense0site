@@ -1,0 +1,21 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/inventory"
+public_folder: "/images/inventory"
+
+collections:
+  - name: "inventory"
+    label: "Inventory / Products"
+    folder: "content/inventory"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title / Model", name: "title", widget: "string"}
+      - {label: "SKU / Item #", name: "id", widget: "string"}
+      - {label: "Price", name: "price", widget: "string", default: "$0.00"}
+      - {label: "Category", name: "category", widget: "select", options: ["Firearms", "Ammunition", "Accessories", "Services"]}
+      - {label: "In Stock?", name: "inStock", widget: "boolean", default: true}
+      - {label: "Product Image", name: "image", widget: "image"}
+      - {label: "Description", name: "description", widget: "text"}
