@@ -161,23 +161,29 @@
             return;
           }
           
-          grid.innerHTML = products.map(item => `
-            <div class="product-card">
-              <div>
-                ${item.image ? `<img src="${item.image}" alt="${item.title}">` : ''}
-                <h3>${item.title}</h3>
-                <p class="sku">SKU: ${item.id}</p>
-                <p class="price">${item.price}</p>
-                <p class="description">${item.description || ''}</p>
+          grid.innerHTML = products.map(item => {
+            const itemTitle = item.title || 'Inventory Item';
+            const itemSku = item.id || 'N/A';
+            const inquireUrl = `contact.html?item=${encodeURIComponent(itemTitle)}&sku=${encodeURIComponent(itemSku)}`;
+
+            return `
+              <div class="product-card">
+                <div>
+                  ${item.image ? `<img src="${item.image}" alt="${itemTitle}">` : ''}
+                  <h3>${itemTitle}</h3>
+                  <p class="sku">SKU: ${itemSku}</p>
+                  <p class="price">${item.price || ''}</p>
+                  <p class="description">${item.description || ''}</p>
+                </div>
+                <div>
+                  ${item.inStock !== false ? 
+                    `<a href="${inquireUrl}" class="inquire-btn">Inquire / Reserve</a>` : 
+                    `<span class="badge-sold">OUT OF STOCK / RESERVED</span>`
+                  }
+                </div>
               </div>
-              <div>
-                ${item.inStock ? 
-                  `<a href="contact.html?item=${encodeURIComponent(item.title)}&sku=${encodeURIComponent(item.id)}" class="inquire-btn">Inquire / Reserve</a>` : 
-                  `<span class="badge-sold">OUT OF STOCK / RESERVED</span>`
-                }
-              </div>
-            </div>
-          `).join('');
+            `;
+          }).join('');
         })
         .catch(err => {
             console.error('Error loading products:', err);
