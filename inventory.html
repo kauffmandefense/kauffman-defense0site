@@ -150,7 +150,7 @@
         <p>&copy; 2026 Kauffman Defense. All rights reserved. Located in Gaylord, MI.</p>
     </footer>
 
-    <!-- Script to render products from CMS -->
+<!-- Script to render products from CMS -->
     <script>
       fetch('/products.json')
         .then(response => response.json())
@@ -172,7 +172,7 @@
               </div>
               <div>
                 ${item.inStock ? 
-                  `<a href="mailto:info@kauffmandefense.com?subject=Inquiry:%20${encodeURIComponent(item.title)}\%20(SKU:\%20${item.id})" class="inquire-btn">Inquire / Reserve</a>` : 
+                  `<a href="contact.html?item=${encodeURIComponent(item.title)}&sku=${encodeURIComponent(item.id)}" class="inquire-btn">Inquire / Reserve</a>` : 
                   `<span class="badge-sold">OUT OF STOCK / RESERVED</span>`
                 }
               </div>
