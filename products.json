@@ -8,6 +8,15 @@
     "image": "images/inventory/glock-43.jpg",
     "inStock": true
   },
+    {
+    "id": "KD-1008",
+    "title": "GLFA Stripped Lower Receiver",
+    "price": "$99.99",
+    "category": "Firearms",
+    "description": "GLFA stripped lower receiver. Made in Michigan! Multiple in stock.",
+    "image": "images/inventory/GLFA_lower.jpg",
+    "inStock": true
+  },
   {
     "id": "KD-1001",
     "title": "CPL Training Class / Private Instruction",
